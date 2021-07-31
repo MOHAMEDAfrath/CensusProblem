@@ -11,12 +11,12 @@ namespace CensusProblem
     {
         string[] censusData;
         //dictionary to store the indian census data;
-        List<CensusData> dataMap;
+        List<FullCensusData> dataMap;
 
         //method list as a type for load census method
-        public List<CensusData> LoadCensusData(string csvFilePath, string header)
+        public List<FullCensusData> LoadCensusData(string csvFilePath, string header)
         {
-            dataMap = new List<CensusData>();
+            dataMap = new List<FullCensusData>();
             censusData = GetCensusData(csvFilePath, header);
             //Skips the header
             foreach (string data in censusData.Skip(1))
@@ -31,7 +31,12 @@ namespace CensusProblem
                 //IndiaStateCensusData
                 if (csvFilePath.Contains("IndianStateCensusInformation.csv"))
                 {
-                    dataMap.Add(new CensusData(col[0], col[1], col[2], col[3],col[4],col[5],col[6]));
+                    dataMap.Add(new FullCensusData((new CensusData(col[0], col[1], col[2], col[3],col[4],col[5],col[6]))));
+                }
+                //IndiaStateCode data
+                if (csvFilePath.Contains("IndianStateCode.csv"))
+                {
+                    dataMap.Add(new FullCensusData(new StateData(col[0], col[1], col[2])));
                 }
             }
             return dataMap;

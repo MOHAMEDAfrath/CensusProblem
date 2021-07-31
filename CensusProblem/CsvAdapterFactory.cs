@@ -9,7 +9,7 @@ namespace CensusProblem
 {
     public class CsvAdapterFactory
     {
-        public List<CensusData> LoadCsvData(CensusAnalyzer.Country country, string csvFilePath, string header)
+        public List<FullCensusData> LoadCsvData(CensusAnalyzer.Country country, string csvFilePath, string header)
         {
             //Checks for the country
             switch (country)
